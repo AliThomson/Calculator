@@ -5,37 +5,76 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("What is your first name?");
-            string firstName = Console.ReadLine();
-
-            Console.WriteLine("What is your last name?");
-            string lastName = Console.ReadLine();
-            
-            Console.WriteLine("Where do you live?");
-            string city = Console.ReadLine();
-
-            DisplayResults(
-                ReverseString(firstName),
-                ReverseString(lastName),
-                ReverseString(city)
-            );
+            bool displayMenu = true;
+            while (displayMenu) 
+            {
+                displayMenu = MainMenu();
+            }
         }
-        private static string ReverseString(string message)
+        private static bool MainMenu() 
         {
-            char[] messageArray = message.ToCharArray();
-            Array.Reverse(messageArray);
-            return String.Concat(messageArray);
-            
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1) Print numbers");
+            Console.WriteLine("2) Guessing game");
+            Console.WriteLine("3) Exit");
+
+            string result = Console.ReadLine();
+            if (result == "1")
+            {
+                PrintNumbers();
+                return true;
+            }
+            else if (result == "2")
+            {
+                GuessingGame();
+                return true;
+            }
+            else if (result == "3")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-        private static void DisplayResults(
-            string revFirstName, 
-            string revLastName, 
-            string revCity)
+        private static void PrintNumbers()
         {
-            Console.Write(String.Format("{0} {1} {2}", 
-                revFirstName, 
-                revLastName, 
-                revCity));
+            Console.Clear();
+            Console.WriteLine("Print Numbers");
+            Console.Write("Type a number:");
+            int result = int.Parse(Console.ReadLine());
+            int counter = 1;
+            while (counter < result + 1)
+            {
+                Console.Write("{0} - ", counter);
+                counter++;
+            }
         }
-    }
+        private static void GuessingGame()
+        {
+            Console.Clear();
+            Console.WriteLine("Guessing game!");
+            Random myRandom = new Random();
+            int randomNumber = myRandom.Next(1,11);
+            int guesses = 0;
+            bool incorrect = true;
+            do
+            {
+                Console.WriteLine("Guess a number between 1 and 10:");
+                int guess = int.Parse(Console.ReadLine());
+                guesses++;
+                if (guess == randomNumber)
+                {
+                    incorrect = false;
+                }
+                else{
+                    Console.WriteLine("Wrong!");
+                    
+                }
+            } while (incorrect);
+            Console.WriteLine("Correct! It took {0} guesses", guesses);
+
+        }
+    } 
 }
