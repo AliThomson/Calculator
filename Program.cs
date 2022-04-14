@@ -1,4 +1,5 @@
-﻿namespace Calculator
+﻿using System;
+namespace Calculator
 {
     class Program
     {
@@ -6,38 +7,46 @@
         {
             Console.WriteLine("enter an operator: ");
             string operand = Console.ReadLine();
+
+            Console.WriteLine("how many numbers do you want to {0}: ", operand);
+            string userSize = Console.ReadLine();
+            int arraySize = int.Parse(userSize);
+
+            int[] numbers = new int[arraySize];
+            for (int i = 0; i < arraySize; i++)
+            {
+                Console.WriteLine("enter number {0}: ", i+1);
+                string userNo = Console.ReadLine();
+                numbers[i] = int.Parse(userNo);
+            }
                         
-            Console.WriteLine("enter a number: ");
-            string firstString = Console.ReadLine();
-            int firstNumber = int.Parse(firstString);
-
-            Console.WriteLine("and another");
-            string secondString = Console.ReadLine();
-            int secondNumber = int.Parse(secondString);
-            int sum = 0;
-
-            if (operand == "+") 
+            int sum = numbers[0];
+            for (int i = 1; i < arraySize; i++)
             {
-                sum = firstNumber + secondNumber;
-            } else if ( operand == "-")
-            {
-                sum = firstNumber - secondNumber;
-            } else if ( operand == "*")
-            {
-                sum = firstNumber * secondNumber;
-            } else if ( operand == "/")
-            {
-                sum = firstNumber / secondNumber;
-            } else
-            {
-                Console.WriteLine("Please enter a valid operand i.e. +, -. * or /");
+                if (operand == "+") 
+                {
+                    sum = sum + numbers[i];
+                }
+                else if ( operand == "-")
+                {
+                    sum = sum - numbers[i];
+                }
+                else if ( operand == "*")
+                {
+                    sum = sum * numbers[i];
+                }
+                else if ( operand == "/")
+                {
+                    sum = sum / numbers[i];
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid operand i.e. +, -. * or /");
+                }
             }
             if (sum != 0){
                 Console.WriteLine("And the answer is: " + sum);
-                Console.ReadLine();
             }
-            
-            
         }
     }
 }
