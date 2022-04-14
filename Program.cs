@@ -5,48 +5,37 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("enter an operator: ");
-            string operand = Console.ReadLine();
+            Console.WriteLine("What is your first name?");
+            string firstName = Console.ReadLine();
 
-            Console.WriteLine("how many numbers do you want to {0}: ", operand);
-            string userSize = Console.ReadLine();
-            int arraySize = int.Parse(userSize);
+            Console.WriteLine("What is your last name?");
+            string lastName = Console.ReadLine();
+            
+            Console.WriteLine("Where do you live?");
+            string city = Console.ReadLine();
 
-            int[] numbers = new int[arraySize];
-            for (int i = 0; i < arraySize; i++)
-            {
-                Console.WriteLine("enter number {0}: ", i+1);
-                string userNo = Console.ReadLine();
-                numbers[i] = int.Parse(userNo);
-            }
-                        
-            int sum = numbers[0];
-            for (int i = 1; i < arraySize; i++)
-            {
-                if (operand == "+") 
-                {
-                    sum = sum + numbers[i];
-                }
-                else if ( operand == "-")
-                {
-                    sum = sum - numbers[i];
-                }
-                else if ( operand == "*")
-                {
-                    sum = sum * numbers[i];
-                }
-                else if ( operand == "/")
-                {
-                    sum = sum / numbers[i];
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a valid operand i.e. +, -. * or /");
-                }
-            }
-            if (sum != 0){
-                Console.WriteLine("And the answer is: " + sum);
-            }
+            DisplayResults(
+                ReverseString(firstName),
+                ReverseString(lastName),
+                ReverseString(city)
+            );
+        }
+        private static string ReverseString(string message)
+        {
+            char[] messageArray = message.ToCharArray();
+            Array.Reverse(messageArray);
+            return String.Concat(messageArray);
+            
+        }
+        private static void DisplayResults(
+            string revFirstName, 
+            string revLastName, 
+            string revCity)
+        {
+            Console.Write(String.Format("{0} {1} {2}", 
+                revFirstName, 
+                revLastName, 
+                revCity));
         }
     }
 }
